@@ -56,6 +56,7 @@ def checkwinner(row, col, player):
 	#check horizontal
 	coincount = 0
 	for coli in xrange(cols):
+		#print "r",row,"c",coli
 		if(board[row][coli] == player):
 			coincount += 1
 		else:
@@ -122,24 +123,24 @@ def winner(player):
 def spaces():
         for i in xrange(5):
                 print
-def test():
+def test(player):
 	for c in xrange(0,cols-3):
-		for r2 in xrange(0, rows-3):
-			#c=0
-			r= r2*-1
-			board[rows-4+r][0+c] = player
-			board[rows-3+r][1+c] = player
-			board[rows-2+r][2+c] = player
-			board[rows-1+r][3+c] = player
-			if not checkwinner(rows-1+r,3+c,player):
+		for r in xrange(0, rows-3):
+			board[rows-4-r][0+c] = player
+			board[rows-3-r][1+c] = player
+			board[rows-2-r][2+c] = player
+			board[rows-1-r][3+c] = player
+			#show()
+			if not checkwinner(rows-1-r,3+c,player):
 				sys.exit()
-			board[rows-4+r][0+c] = 0
-			board[rows-3+r][1+c] = 0
-			board[rows-2+r][2+c] = 0
-			board[rows-1+r][3+c] = 0
+			board[rows-4-r][0+c] = 0
+			board[rows-3-r][1+c] = 0
+			board[rows-2-r][2+c] = 0
+			board[rows-1-r][3+c] = 0
 			
 def main():
 	player = 1
+	#test(player)
 	i = rows*cols
 	while True:
 		show()
@@ -150,9 +151,9 @@ def main():
 			#	col -= 1
 			#except :
 			#	col = int(raw_input(""))-1
-			col = int(raw_input(""))-1
+			#col = int(raw_input(""))-1
 			spaces()
-			#col = random.randrange(0,cols,1)
+			col = random.randrange(0,cols,1)
 			if not (dropcoin(col ,player)):
 				print "no"
 			else:
