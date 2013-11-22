@@ -7,24 +7,22 @@ rows = 9
 cols = 9
 board = [[0 for col in xrange(cols)]for row in xrange(rows)]
 
-testcase = [4,5,6,7,5,6,7,7,6,3,7]
-
 #characters = [" ","?","?"]
 characters = [" ","o","x"]
 
 def show():
-	for i in xrange(0,cols):
+	for i in xrange(1,cols+1):
 		sys.stdout.write(" "+str(i))
 	print " "
-	k = 0
+	#k = 0
 	for i in board:
-		print k,
-		k +=1
+		#print k,
+		#k +=1
 		for j in i:
 			#print "|",characters[j],
 			sys.stdout.write("|" +characters[j])
 		print "|"
-	for i in xrange(0,cols):
+	for i in xrange(1,cols+1):
 		sys.stdout.write(" "+str(i))
 	print " "
 
