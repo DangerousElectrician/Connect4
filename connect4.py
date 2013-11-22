@@ -7,7 +7,9 @@ rows = 6
 cols = 7
 board = [[0 for col in xrange(cols)]for row in xrange(rows)]
 
-#characters = [" ","?","?"]
+moves = []
+
+#characters = [" ","○","●"]
 characters = [" ","o","x"]
 
 def show():
@@ -118,6 +120,7 @@ def checkwinner(row, col, player):
 def winner(player):
 	show()
 	print characters[player], "wins"
+	print moves
 	sys.exit()
 	
 def spaces():
@@ -151,9 +154,10 @@ def main():
 			#	col -= 1
 			#except :
 			#	col = int(raw_input(""))-1
-			#col = int(raw_input(""))-1
+			col = int(raw_input(""))-1
 			spaces()
-			col = random.randrange(0,cols,1)
+			#col = random.randrange(0,cols,1)
+			moves.append(col)
 			if not (dropcoin(col ,player)):
 				print "no"
 			else:
