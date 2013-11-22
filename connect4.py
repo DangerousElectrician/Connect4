@@ -30,17 +30,15 @@ def show():
 
 
 def dropcoin(col, player):
-	if (col >= cols or col < 0):
-		return False
-	if (board[0][col] != 0):
-		return False
+	if (col >= cols or col < 0 or board[0][col] != 0):
+		return [False,-1,col]
 	for row in xrange(rows):
 		if (board[row][col]!=0):
 			row -= 1
 			break
 	board[row][col] = player
 	checkwinner(row, col, player)
-	return True
+	return [True,row,col]
 
 
 def checkwinner(row, col, player):
@@ -158,7 +156,7 @@ def main():
 			spaces()
 			#col = random.randrange(0,cols,1)
 			moves.append(col)
-			if not (dropcoin(col ,player)):
+			if not (dropcoin(col ,player)[0]):
 				print "no"
 			else:
 				i -= 1
