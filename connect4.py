@@ -3,8 +3,8 @@
 import sys
 import random
 
-rows = 9
-cols = 9
+rows = 6
+cols = 7
 board = [[0 for col in xrange(cols)]for row in xrange(rows)]
 
 #characters = [" ","?","?"]
