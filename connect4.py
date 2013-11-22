@@ -3,16 +3,17 @@
 import sys
 import random
 
-rows = 6
-cols = 7
+rows = 9
+cols = 9
 board = [[0 for col in xrange(cols)]for row in xrange(rows)]
 
 testcase = [4,5,6,7,5,6,7,7,6,3,7]
 
-characters = [" ","?","?"]
+#characters = [" ","?","?"]
+characters = [" ","o","x"]
 
 def show():
-	for i in xrange(1,cols+1):
+	for i in xrange(0,cols):
 		sys.stdout.write(" "+str(i))
 	print " "
 	k = 0
@@ -23,7 +24,7 @@ def show():
 			#print "|",characters[j],
 			sys.stdout.write("|" +characters[j])
 		print "|"
-	for i in xrange(1,cols+1):
+	for i in xrange(0,cols):
 		sys.stdout.write(" "+str(i))
 	print " "
 
@@ -37,10 +38,7 @@ def dropcoin(col, player):
 		if (board[row][col]!=0):
 			row -= 1
 			break
-			#checkwinner(row-1, col, player)
-			#return True
 	board[row][col] = player
-	#print row,col
 	checkwinner(row, col, player)
 	return True
 
@@ -54,6 +52,7 @@ def checkwinner(row, col, player):
 		else:
 			coincount = 0
 		if(coincount >= 4):
+			print "up down"
 			winner(player)
 			return True
 	#check horizontal
@@ -64,57 +63,57 @@ def checkwinner(row, col, player):
 		else:
 			coincount = 0
 		if(coincount >= 4):
+			print "horizontal"
 			winner(player)
+			return True
 	#check diagonal
+		
 	coincount = 0
-	if (row > col):
-		coli = 0
-		rowi = row - col
-	elif (col > row):
-		coli = col - row
-		rowi = 0
-	else:
-		rowi = 0
-		coli = 0
-	try:
-		while True:
-			if (board[rowi][coli] == player):
-				coincount += 1
-			else:
-				coincount = 0
-			if(coincount >= 4):
-				print "right diag"
-				winner(player)
-			coli +=1
-			rowi +=1
-	except IndexError:
-		pass
-
+	rowi = row
+	coli = col
+	while True:
+		if (rowi==0 or coli == 0):
+			break
+		rowi-=1
+		coli-=1
+	while True:
+		if (board[rowi][coli] == player):
+			coincount += 1
+			#print "row:",rowi,"col:",coli
+		else:
+			coincount = 0
+		if(coincount >= 4):
+			print "right diag"
+			winner(player)
+			return True
+		coli +=1
+		rowi +=1
+		if (coli > cols-1 or rowi > rows-1):	#python arrays don't throw an exception with negative indexes
+			break
+			
 	coincount = 0
-	if (row > col):
-		coli = 0
-		rowi = row + col
-	elif (col > row):
-		coli = cols-col-1
-		rowi = cols-col-1
-	else:
-		rowi = 0
-		coli = cols-1
-	try:
-		while True:
-			if (board[rowi][coli] == player):
-				coincount += 1
-			else:
-				coincount = 0
-			if(coincount >= 4):
-				print "left diag"
-				winner(player)
-			coli -=1
-			if (coli < 0):	#python arrays don't throw an exception with negative indexes
-				break
-			rowi +=1
-	except IndexError:
-		pass
+	rowi = row
+	coli = col
+	while True:
+		if (rowi==0 or coli == (cols-1)):
+			break
+		rowi-=1
+		coli+=1
+	while True:
+		if (board[rowi][coli] == player):
+			coincount += 1
+			#print "row:",rowi,"col:",coli
+		else:
+			coincount = 0
+		if(coincount >= 4):
+			print "left diag"
+			winner(player)
+			return True
+		coli -=1
+		rowi +=1
+		if (coli < 0 or rowi >= rows or row < 0):	#python arrays don't throw an exception with negative indexes
+			break
+	
 	return False
 
 def winner(player):
@@ -125,18 +124,24 @@ def winner(player):
 def spaces():
         for i in xrange(5):
                 print
-
+def test():
+	for c in xrange(0,cols-3):
+		for r2 in xrange(0, rows-3):
+			#c=0
+			r= r2*-1
+			board[rows-4+r][0+c] = player
+			board[rows-3+r][1+c] = player
+			board[rows-2+r][2+c] = player
+			board[rows-1+r][3+c] = player
+			if not checkwinner(rows-1+r,3+c,player):
+				sys.exit()
+			board[rows-4+r][0+c] = 0
+			board[rows-3+r][1+c] = 0
+			board[rows-2+r][2+c] = 0
+			board[rows-1+r][3+c] = 0
+			
 def main():
 	player = 1
-	c=2 
-	r=0
-	board[5+r][0+c] = player
-	board[4+r][1+c] = player
-	board[3+r][2+c] = player
-	board[2+r][3+c] = player
-	checkwinner(2+r,3+c,player)
-	
-	
 	i = rows*cols
 	while True:
 		show()
