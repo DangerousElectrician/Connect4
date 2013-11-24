@@ -172,7 +172,9 @@ def main():
 		except ValueError:
 			spaces()
 			print "no"
-	
-main()
 
-
+try:			
+	main()
+except :
+	print moves
+	print sys.exc_info()[0]
