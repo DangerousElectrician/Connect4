@@ -118,7 +118,7 @@ def checkwinner(row, col, player):
 def winner(player):
 	show()
 	print characters[player], "wins"
-	print moves
+	#print moves
 	sys.exit()
 	
 def spaces():
@@ -146,7 +146,7 @@ def main():
 	while True:
 		show()
 		try:
-			print "player",characters[player],"move:",
+			print "player",characters[player],"'s move:",
 			#try:
 			#	col = testcase[rows*cols-i]
 			#	col -= 1
