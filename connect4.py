@@ -3,14 +3,16 @@
 import sys
 import random
 
-rows = 6
-cols = 7
+rows = 69
+cols = 69
+win = 4
+
 board = [[0 for col in xrange(cols)]for row in xrange(rows)]
 
 moves = []
 
-#characters = [" ","○","●"]
-characters = [" ","o","x"]
+characters = [" ","○","●"]
+#characters = [" ","o","x"]
 
 def show():
 	for i in xrange(1,cols+1):
@@ -49,7 +51,7 @@ def checkwinner(row, col, player):
 			coincount += 1
 		else:
 			coincount = 0
-		if(coincount >= 4):
+		if(coincount >= win):
 			print "up down"
 			winner(player)
 			return True
@@ -61,7 +63,7 @@ def checkwinner(row, col, player):
 			coincount += 1
 		else:
 			coincount = 0
-		if(coincount >= 4):
+		if(coincount >= win):
 			print "horizontal"
 			winner(player)
 			return True
@@ -81,7 +83,7 @@ def checkwinner(row, col, player):
 			#print "row:",rowi,"col:",coli
 		else:
 			coincount = 0
-		if(coincount >= 4):
+		if(coincount >= win):
 			print "right diag"
 			winner(player)
 			return True
@@ -104,7 +106,7 @@ def checkwinner(row, col, player):
 			#print "row:",rowi,"col:",coli
 		else:
 			coincount = 0
-		if(coincount >= 4):
+		if(coincount >= win):
 			print "left diag"
 			winner(player)
 			return True
